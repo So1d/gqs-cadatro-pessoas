@@ -1,20 +1,7 @@
 # Sistema de Cadastro de Pessoas - versao 2
 # novos requisitos: menu, consulta, alteracao e listagem
  
-nome1 = ""
-idade1 = 0
-email1 = ""
-nome2 = ""
-idade2 = 0
-email2 = ""
-nome3 = ""
-idade3 = 0
-email3 = ""
- 
-qtd = 0
-op = 0
- 
-while op != 5:
+def exibir_menu():
     print("=========================")
     print(" CADASTRO DE PESSOAS")
     print("=========================")
@@ -23,7 +10,37 @@ while op != 5:
     print("3 - Alterar pessoa")
     print("4 - Listar pessoas")
     print("5 - Sair")
-    op = int(input("Escolha uma opcao: "))
+    return int(input("Escolha uma opcao: "))
+
+def cadastrar_pessoas(nomes, idades, emails):
+    nomes.append(input("Informe o nome:"))
+    idade = int(input("Informe a idade:"))
+    idades.append(idade)
+    emails.append(input("Informe o email:"))
+    if idade >= 18:
+       print("Situacao: Maior de idade")
+    else:
+       print("Situacao: Menor de idade") 
+    
+# nome1 = ""
+# idade1 = 0
+# email1 = ""
+# nome2 = ""
+# idade2 = 0
+# email2 = ""
+# nome3 = ""
+# idade3 = 0
+# email3 = ""
+nomes = []
+idades = []
+emails = []
+ 
+qtd = 0
+op = 0
+ 
+while op != 5:
+    
+    op = exibir_menu()
  
     if op == 1:
         if qtd == 3:
@@ -49,10 +66,6 @@ while op != 5:
             print("Nome: " + n)
             print("Idade: " + str(i))
             print("E-mail: " + e)
-            if i >= 18:
-                print("Situacao: Maior de idade")
-            else:
-                print("Situacao: Menor de idade") 
     elif op == 2:
         b = input("Nome para consultar: ")
         achou = 0
@@ -148,4 +161,3 @@ while op != 5:
         print("Opcao invalida")
  
 print("Fim do programa")
-
