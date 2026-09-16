@@ -1,7 +1,8 @@
-# Sistema de Cadastro de Pessoas - versao 2
+"""Sistema de Cadastro de Pessoas - versao 2"""
 # novos requisitos: menu, consulta, alteracao e listagem
 
 def exibir_menu():
+    """Exibe o menu de opções e retirba as opts"""
     print("=========================")
     print(" CADASTRO DE PESSOAS")
     print("=========================")
