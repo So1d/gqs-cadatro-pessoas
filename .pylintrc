@@ -1,0 +1,52 @@
+# Configuração do PyLint do projeto "Cadastro de Pessoas".
+# O PyLint procura automaticamente o arquivo `.pylintrc` na pasta atual
+# (e nas pastas pai), então basta executar `pylint Cadastro.py` na raiz.
+# Também pode ser indicado explicitamente: `pylint --rcfile=.pylintrc Cadastro.py`.
+
+[MAIN]
+# Versão mínima de Python alvo do projeto.
+py-version = 3.12
+# Mantém o cache da análise entre execuções para acelerar o pré-commit.
+persistent = true
+# Pontuação mínima para a análise ser considerada aprovada (exit code 0).
+# Mantida abaixo de 10 para não travar o pré-commit por avisos pontuais,
+# mas o objetivo do projeto é permanecer próximo de 10.00.
+fail-under = 9.0
+
+[MESSAGES CONTROL]
+# O projeto não desativa nenhuma mensagem do PyLint: todos os apontamentos
+# são analisados e corrigidos no código, em vez de silenciados aqui.
+# Caso alguma regra precise ser ignorada no futuro, registrar o motivo:
+# disable =
+
+[REPORTS]
+# Relatório compacto, fácil de anexar nos relatórios da disciplina.
+output-format = text
+reports = false
+score = true
+
+[FORMAT]
+# Limite de coluna alinhado ao padrão do projeto (o padrão do PEP 8 é 79).
+max-line-length = 100
+indent-string = '    '
+
+[BASIC]
+# Nomes curtos aceitos pelo projeto, comuns em laços e contadores.
+good-names = i,j,k,ex,Run,_,n,e,b,op,qnd
+# Nomes de módulo em snake_case (ex.: cadastro.py).
+module-rgx = [a-z_][a-z0-9_]*$
+
+[DESIGN]
+# Limites um pouco acima do padrão, adequados ao porte deste projeto.
+max-args = 7
+max-locals = 20
+max-returns = 8
+max-branches = 20
+max-statements = 100
+max-attributes = 10
+
+[SIMILARITIES]
+# Blocos repetidos a partir de 6 linhas já são sinalizados como duplicação.
+min-similarity-lines = 6
+ignore-comments = true
+ignore-imports = true
