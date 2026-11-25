@@ -158,25 +158,27 @@ def analisar_pessoa(cadastro):
 def executar():
     """Executa o menu principal da aplicação."""
     cadastro = CadastroPessoas(criar_repositorio())
-    op = 0
+    acoes = {
+        1: cadastrar_pessoa,
+        2: consultar_pessoa,
+        3: alterar_pessoa,
+        4: listar_pessoas,
+        5: analisar_pessoa,
+    }
 
-    while op != 6:
-        op = exibir_menu()
+    while True:
+        opcao = exibir_menu()
 
-        if op == 1:
-            cadastrar_pessoa(cadastro)
-        elif op == 2:
-            consultar_pessoa(cadastro)
-        elif op == 3:
-            alterar_pessoa(cadastro)
-        elif op == 4:
-            listar_pessoas(cadastro)
-        elif op == 5:
-            analisar_pessoa(cadastro)
-        elif op == 6:
+        if opcao == 6:
             print("Saindo...")
-        else:
+            break
+
+        acao = acoes.get(opcao)
+
+        if acao is None:
             print("Opcao invalida")
+        else:
+            acao(cadastro)
 
     print("Fim do programa")
 
