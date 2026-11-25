@@ -91,8 +91,11 @@ O arquivo `infra/compose.yaml` sobe dois serviços:
 
 ```bash
 cd infra
+cp .env.example .env
+# Edite .env e substitua o valor de exemplo por uma senha local.
 docker compose up -d
 docker compose ps
+cd ..
 ```
 
 O `up -d` apenas inicia os serviços. Na primeira inicialização, o script
@@ -109,18 +112,21 @@ Os campos `Replica_IO_Running` e `Replica_SQL_Running` precisam estar em `Yes`.
 
 ### Banco, tabela e variáveis de ambiente
 
-Banco: `cadastro`. Tabela: `pessoa (id, nome, idade, email)`.
+Banco: `cadastro`. Tabela: `pessoa (id, nome, idade, email)`. A variável
+`MYSQL_ROOT_PASSWORD`, definida em `infra/.env`, configura a senha de `root` nos
+dois contêineres. O arquivo real é ignorado pelo Git; mantenha a senha fora do
+repositório.
 
 ```bash
+set -a
+source infra/.env
+set +a
 export DB_HOST=localhost
 export DB_PORT=3307
 export DB_USER=root
-export DB_PASSWORD='<senha do MySQL>'
+export DB_PASSWORD="$MYSQL_ROOT_PASSWORD"
 export DB_NAME=cadastro
 ```
-
-As variáveis valem apenas para a sessão atual do terminal. Senhas e arquivos `.env`
-não devem ser versionados; o `.gitignore` já cobre `.env`.
 
 A escrita acontece sempre no principal. A réplica recebe as alterações por
 replicação assíncrona e pode apresentar atraso.

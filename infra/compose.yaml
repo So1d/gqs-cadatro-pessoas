@@ -1,4 +1,4 @@
-﻿services:
+services:
   principal:
     image: mysql:8.4.13
     command: [
@@ -10,7 +10,7 @@
       "--skip-name-resolve=ON"
     ]
     environment:
-      MYSQL_ROOT_PASSWORD: root_lab_2026
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD:?Set it in infra/.env}"
     ports: ["127.0.0.1:3307:3306"]
     volumes:
       - principal-data:/var/lib/mysql
@@ -39,7 +39,7 @@
       "--skip-name-resolve=ON"
     ]
     environment:
-      MYSQL_ROOT_PASSWORD: root_lab_2026
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD:?Set it in infra/.env}"
     ports: ["127.0.0.1:3308:3306"]
     volumes:
       - replica-data:/var/lib/mysql
