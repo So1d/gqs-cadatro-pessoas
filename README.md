@@ -34,6 +34,7 @@ controle de versão com Git e GitHub.
 | `tests/test_cadastro.py` | Testes automatizados com PyTest |
 | `infra/compose.yaml` | MySQL principal e réplica, com replicação configurada |
 | `infra/init/01-schema.sql` | Criação automática do banco e da tabela na primeira subida |
+| `infra/.env.example` | Modelo sem senha real para criar a configuração local `infra/.env` |
 | `documentos/checklist-inspecao.md` | Checklist de inspeção de código usado nas aulas |
 | `.pylintrc` | Configuração da análise estática |
 | `.pre-commit-config.yaml` | Hooks executados antes de cada commit |
@@ -98,11 +99,42 @@ docker compose ps
 cd ..
 ```
 
-O `up -d` apenas inicia os serviços. Na primeira inicialização, o script
+O `up -d` inicia os serviços. Na primeira inicialização, o script
 `infra/init/01-schema.sql` cria o banco `cadastro`, a tabela `pessoa` e o índice por
-nome. O vínculo de replicação, com a criação do usuário `repl`, o
-`CHANGE REPLICATION SOURCE` e o `START REPLICA`, segue o roteiro da Aula 11. A
-verificação é feita na réplica:
+nome. Depois, configure a replicação conforme o roteiro da Aula 11. No terminal em
+que está o diretório `infra`, abra o cliente do principal:
+
+```bash
+docker compose exec principal mysql -uroot -p
+```
+
+Crie o usuário de replicação no principal, usando uma senha definida para o ambiente
+local:
+
+```sql
+CREATE USER 'repl'@'%' IDENTIFIED BY '<senha de replicacao>';
+GRANT REPLICATION SLAVE ON *.* TO 'repl'@'%';
+```
+
+No cliente do serviço `replica`, configure a origem e inicie a replicação com a mesma
+senha:
+
+```bash
+docker compose exec replica mysql -uroot -p
+```
+
+```sql
+CHANGE REPLICATION SOURCE TO
+  SOURCE_HOST = 'principal',
+  SOURCE_PORT = 3306,
+  SOURCE_USER = 'repl',
+  SOURCE_PASSWORD = '<senha de replicacao>',
+  SOURCE_AUTO_POSITION = 1,
+  GET_SOURCE_PUBLIC_KEY = 1;
+START REPLICA;
+```
+
+A verificação é feita na réplica:
 
 ```sql
 SHOW REPLICA STATUS\G
