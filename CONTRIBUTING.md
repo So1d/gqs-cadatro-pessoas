@@ -9,14 +9,17 @@ As alterações devem ser realizadas de forma incremental e verificável, preser
 Após clonar o repositório:
 
 ```bash
-git clone URL_DO_REPOSITORIO_DE_B
+git clone git@github.com:So1d/gqs-cadatro-pessoas.git
 cd gqs-cadatro-pessoas
 ```
 
-Instale as ferramentas utilizadas no projeto:
+Instale as dependências em um ambiente virtual:
 
 ```bash
-pip install pylint radon pre-commit
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
 ```
 
 Ative o hook do pre-commit:
@@ -28,6 +31,14 @@ pre-commit install
 O comando `pre-commit install` deve ser executado em cada novo clone do repositório, pois o hook é instalado localmente no diretório `.git`.
 
 O arquivo `.pre-commit-config.yaml` faz parte do projeto e é versionado pelo Git. Portanto, ele é obtido normalmente ao realizar o clone.
+
+## Padrões de código
+
+- Mantenha nomes claros e funções com responsabilidades pequenas.
+- Siga o limite de 79 caracteres por linha configurado em `.pylintrc`.
+- Inclua docstrings em módulos e classes.
+- Mantenha a persistência atrás do contrato `RepositorioPessoas`.
+- Não versione senhas, arquivos `.env`, ambientes virtuais ou caches.
 
 ## Antes de iniciar uma alteração
 
@@ -108,7 +119,8 @@ pre-commit run --all-files
 A complexidade ciclomática pode ser analisada com Radon:
 
 ```bash
-radon cc src -s
+radon cc -s -a src
+radon mi -s src
 ```
 
 Os resultados devem ser interpretados considerando a responsabilidade e o contexto de cada função ou método.
@@ -171,9 +183,11 @@ __pycache__/
 Antes de realizar o merge, execute o programa e as verificações previstas:
 
 ```bash
-python src/main.py
+python -m pytest -v
 pylint src
-radon cc src -s
+radon cc -s -a src
+radon mi -s src
+pre-commit run --all-files
 git status
 ```
 
