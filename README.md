@@ -33,6 +33,7 @@ controle de versão com Git e GitHub.
 | `src/main.py` | Menu, entrada de dados e escolha do repositório |
 | `tests/test_cadastro.py` | Testes automatizados com PyTest |
 | `infra/compose.yaml` | MySQL principal e réplica, com replicação configurada |
+| `infra/init/01-schema.sql` | Criação automática do banco e da tabela na primeira subida |
 | `documentos/checklist-inspecao.md` | Checklist de inspeção de código usado nas aulas |
 | `.pylintrc` | Configuração da análise estática |
 | `.pre-commit-config.yaml` | Hooks executados antes de cada commit |
@@ -94,9 +95,11 @@ docker compose up -d
 docker compose ps
 ```
 
-O `up -d` apenas inicia os serviços. O vínculo de replicação, com a criação do
-usuário `repl`, o `CHANGE REPLICATION SOURCE` e o `START REPLICA`, segue o roteiro
-da Aula 11. A verificação é feita na réplica:
+O `up -d` apenas inicia os serviços. Na primeira inicialização, o script
+`infra/init/01-schema.sql` cria o banco `cadastro`, a tabela `pessoa` e o índice por
+nome. O vínculo de replicação, com a criação do usuário `repl`, o
+`CHANGE REPLICATION SOURCE` e o `START REPLICA`, segue o roteiro da Aula 11. A
+verificação é feita na réplica:
 
 ```sql
 SHOW REPLICA STATUS\G
