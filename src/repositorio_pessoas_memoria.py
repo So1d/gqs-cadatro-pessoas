@@ -1,9 +1,18 @@
+"""Repositório de pessoas mantido em memória.
+
+Guarda os registros em uma lista durante a execução do programa. Serve
+para uso didático e para os testes automatizados, que não devem depender
+de um servidor MySQL disponível.
+"""
+
 from typing import List, Optional
 
 from pessoa import Pessoa
 from repositorio_pessoas import RepositorioPessoas
 
+
 class RepositorioPessoasMemoria(RepositorioPessoas):
+    """Armazena as pessoas em uma lista na memória do processo."""
     def __init__(self) -> None:
         self.__pessoas: List[Pessoa] = []
 

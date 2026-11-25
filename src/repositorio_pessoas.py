@@ -1,9 +1,18 @@
+"""Contrato de persistência de pessoas.
+
+Define as operações que qualquer implementação de repositório precisa
+oferecer, mantendo as regras de negócio independentes do mecanismo de
+armazenamento utilizado.
+"""
+
 from abc import ABC, abstractmethod
 from typing import List, Optional
 
 from pessoa import Pessoa
 
+
 class RepositorioPessoas(ABC):
+    """Interface comum aos repositórios de pessoas."""
     @abstractmethod
     def cadastrar(self, pessoa: Pessoa) -> None:
         pass
