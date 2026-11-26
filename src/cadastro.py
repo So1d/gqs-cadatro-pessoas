@@ -18,17 +18,21 @@ class CadastroPessoas:
         self.__repositorio = repositorio
 
     def cadastrar(self, nome, idade, email):
+        """Cria e persiste uma pessoa, devolvendo a entidade criada."""
         pessoa = Pessoa(nome, idade, email)
         self.__repositorio.cadastrar(pessoa)
         return pessoa
 
     def buscarPorNome(self, nome):
+        """Busca uma pessoa pelo nome."""
         return self.__repositorio.buscar(nome)
 
     def listar(self) -> List[Pessoa]:
+        """Devolve todas as pessoas cadastradas."""
         return self.__repositorio.listar()
 
     def alterar(self, nome, novo_nome, nova_idade, novo_email):
+        """Atualiza os dados da pessoa identificada pelo nome atual."""
         pessoa = self.buscarPorNome(nome)
 
         if pessoa is None:

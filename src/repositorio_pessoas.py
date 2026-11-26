@@ -15,16 +15,20 @@ class RepositorioPessoas(ABC):
     """Interface comum aos repositórios de pessoas."""
     @abstractmethod
     def cadastrar(self, pessoa: Pessoa) -> None:
-        pass
+        """Persiste uma pessoa."""
+        raise NotImplementedError
 
     @abstractmethod
     def buscar(self, nome: str) -> Optional[Pessoa]:
-        pass
+        """Busca a primeira pessoa com o nome informado."""
+        raise NotImplementedError
 
     @abstractmethod
     def listar(self) -> List[Pessoa]:
-        pass
+        """Devolve todas as pessoas persistidas."""
+        raise NotImplementedError
 
     @abstractmethod
     def alterar(self, nome: str, nova_pessoa: Pessoa) -> bool:
-        pass
+        """Atualiza a pessoa e informa se encontrou o registro."""
+        raise NotImplementedError

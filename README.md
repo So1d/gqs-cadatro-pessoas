@@ -193,5 +193,20 @@ radon cc -a src    média A (1.77)
 radon mi src       todos os módulos em A
 ```
 
+## Colaboração e rastreabilidade
+
+A colaboração foi registrada por Pull Requests entre forks:
+
+| Contribuição | Pull Request |
+|---|---|
+| Persistência MySQL recebida da Cler | [PR #1](https://github.com/So1d/gqs-cadatro-pessoas/pull/1) |
+| Contrato `RepositorioPessoas` enviado ao repositório da Cler | [PR #2](https://github.com/ClerAndrade/gqs-cadatro-pessoas/pull/2) |
+| Sincronização do estado final no repositório da Cler | [PR #3](https://github.com/ClerAndrade/gqs-cadatro-pessoas/pull/3) |
+| Integração do branch `develop` no `main` deste fork | [PR #3](https://github.com/So1d/gqs-cadatro-pessoas/pull/3) |
+
+Os PRs foram integrados. O GitHub não registra eventos formais de revisão nesses PRs;
+portanto, esta tabela documenta a colaboração e a integração, não comprova revisão
+formal.
+
 As orientações de colaboração, padrões de código e convenções de commit estão em
 `CONTRIBUTING.md`.

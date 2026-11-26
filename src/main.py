@@ -8,6 +8,7 @@ USAR_MYSQL = True
 
 
 def criar_repositorio():
+    """Cria a implementação de persistência selecionada."""
     if USAR_MYSQL:
         return RepositorioPessoasMySQL.a_partir_do_ambiente()
     return RepositorioPessoasMemoria()

@@ -13,7 +13,9 @@ from repositorio_pessoas import RepositorioPessoas
 class RepositorioPessoasMySQL(RepositorioPessoas):
     """Persiste pessoas na tabela pessoa do MySQL principal."""
 
-    def __init__(self, host, port, usuario, senha, banco):  # pylint: disable=too-many-arguments
+    def __init__(
+        self, host, port, usuario, senha, banco
+    ):  # pylint: disable=too-many-arguments
         self._config = {
             "host": host,
             "port": port,

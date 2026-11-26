@@ -36,7 +36,7 @@ O arquivo `.pre-commit-config.yaml` faz parte do projeto e é versionado pelo Gi
 
 - Mantenha nomes claros e funções com responsabilidades pequenas.
 - Siga o limite de 79 caracteres por linha configurado em `.pylintrc`.
-- Inclua docstrings em módulos e classes.
+- Inclua docstrings em módulos, classes e funções públicas.
 - Mantenha a persistência atrás do contrato `RepositorioPessoas`.
 - Não versione senhas, arquivos `.env`, ambientes virtuais ou caches.
 
@@ -140,7 +140,15 @@ Adicione somente os arquivos relacionados à alteração:
 git add <arquivos>
 ```
 
-Os commits devem representar alterações pequenas e verificáveis, com mensagens que indiquem claramente o objetivo da mudança.
+Os commits devem representar alterações pequenas e verificáveis, com mensagens que indiquem claramente o objetivo da mudança. Use o padrão `tipo: descrição`, com um dos tipos abaixo:
+
+- `feat`: funcionalidade;
+- `fix`: correção;
+- `refactor`: reorganização interna sem mudança funcional;
+- `test`: testes;
+- `docs`: documentação;
+- `style`: formatação ou ajustes de estilo;
+- `chore`: configuração e manutenção.
 
 Exemplos:
 

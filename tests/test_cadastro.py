@@ -51,6 +51,7 @@ class RepositorioDeCopias(RepositorioPessoasMemoria):
     [RepositorioPessoasMemoria, RepositorioDeCopias]
 )
 def test_alterar_persiste(fabrica):
+    """Confere que a alteração é persistida em diferentes repositórios."""
     repositorio = fabrica()
     repositorio.cadastrar(
         Pessoa("Ana Souza", 30, "ana@example.com")

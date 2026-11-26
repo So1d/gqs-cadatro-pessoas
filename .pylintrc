@@ -345,7 +345,7 @@ indent-after-paren=4
 indent-string='    '
 
 # Maximum number of characters on a single line.
-max-line-length=100
+max-line-length=79
 
 # Maximum number of lines in a module.
 max-module-lines=1000
@@ -429,6 +429,8 @@ confidence=HIGH,
 # --enable=similarities". If you want to run only the classes checker, but have
 # no Warning level messages displayed, use "--disable=all --enable=classes
 # --disable=W".
+# A API legada da classe Pessoa usa métodos camelCase, enquanto módulos novos
+# também têm métodos snake_case; invalid-name fica desativado por compatibilidade.
 disable=raw-checker-failed,
         bad-inline-option,
         locally-disabled,
@@ -440,9 +442,7 @@ disable=raw-checker-failed,
         use-implicit-booleaness-not-comparison-to-string,
         use-implicit-booleaness-not-comparison-to-zero,
         invalid-name,
-        trailing-whitespace,
-        redefined-outer-name,
-        missing-function-docstring
+        redefined-outer-name
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
